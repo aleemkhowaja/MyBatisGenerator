@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="DGTL_XML_MSG_TAGS" >
+  <resultMap id="BaseResultMap" type="com.path.dbmaps.vo.DGTL_XML_MSG_TAGSVO" >
+    <id column="DGTL_XML_MSG_TAGS_ID" property="DGTL_XML_MSG_TAGS_ID" />
+    <result column="DGTL_MSG_DEF_ID" property="DGTL_MSG_DEF_ID" />
+    <result column="PARENT_TAG_NAME" property="PARENT_TAG_NAME" />
+    <result column="COMPLEX_TYPE" property="COMPLEX_TYPE" />
+    <result column="TAG_NAME" property="TAG_NAME" />
+    <result column="TAGE_TYPE" property="TAGE_TYPE" />
+    <result column="DESCRIPTION" property="DESCRIPTION" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DGTL_XML_MSG_TAGS_ID, DGTL_MSG_DEF_ID, PARENT_TAG_NAME, COMPLEX_TYPE, TAG_NAME, TAGE_TYPE, 
+    DESCRIPTION
+  </sql>
+  <select id="selectDGTL_XML_MSG_TAGS" resultMap="BaseResultMap" parameterType="com.path.dbmaps.vo.DGTL_XML_MSG_TAGSVO" >
+    select 
+    <include refid="Base_Column_List" />
+    from DGTL_XML_MSG_TAGS
+    where DGTL_XML_MSG_TAGS_ID = #{DGTL_XML_MSG_TAGS_ID}
+  </select>
+  <delete id="deleteDGTL_XML_MSG_TAGS" parameterType="com.path.dbmaps.vo.DGTL_XML_MSG_TAGSVO" >
+    delete from DGTL_XML_MSG_TAGS
+    where DGTL_XML_MSG_TAGS_ID = #{DGTL_XML_MSG_TAGS_ID}
+  </delete>
+  <insert id="insertDGTL_XML_MSG_TAGS" parameterType="com.path.dbmaps.vo.DGTL_XML_MSG_TAGSVO" >
+    <selectKey resultType="java.math.BigDecimal" keyProperty="DGTL_XML_MSG_TAGS_ID" order="BEFORE" >
+      SELECT <choose><when test="isSybase == 1">ISNULL(MAX(DGTL_XML_MSG_TAGS_ID),0)+1</when><otherwise>NVL(MAX(DGTL_XML_MSG_TAGS_ID),0)+1</otherwise></choose> FROM DGTL_XML_MSG_TAGS
+    </selectKey>
+    insert into DGTL_XML_MSG_TAGS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      DGTL_XML_MSG_TAGS_ID,
+      <if test="DGTL_MSG_DEF_ID != null and DGTL_MSG_DEF_ID != emptyBigDecimalValue" >
+        DGTL_MSG_DEF_ID,
+      </if>
+      <if test="PARENT_TAG_NAME != null and !&quot;&quot;.equals(PARENT_TAG_NAME)" >
+        PARENT_TAG_NAME,
+      </if>
+      <if test="COMPLEX_TYPE != null and !&quot;&quot;.equals(COMPLEX_TYPE)" >
+        COMPLEX_TYPE,
+      </if>
+      <if test="TAG_NAME != null and !&quot;&quot;.equals(TAG_NAME)" >
+        TAG_NAME,
+      </if>
+      <if test="TAGE_TYPE != null and !&quot;&quot;.equals(TAGE_TYPE)" >
+        TAGE_TYPE,
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{DGTL_XML_MSG_TAGS_ID},
+      <if test="DGTL_MSG_DEF_ID != null and DGTL_MSG_DEF_ID != emptyBigDecimalValue" >
+        #{DGTL_MSG_DEF_ID},
+      </if>
+      <if test="PARENT_TAG_NAME != null and !&quot;&quot;.equals(PARENT_TAG_NAME)" >
+        #{PARENT_TAG_NAME},
+      </if>
+      <if test="COMPLEX_TYPE != null and !&quot;&quot;.equals(COMPLEX_TYPE)" >
+        #{COMPLEX_TYPE},
+      </if>
+      <if test="TAG_NAME != null and !&quot;&quot;.equals(TAG_NAME)" >
+        #{TAG_NAME},
+      </if>
+      <if test="TAGE_TYPE != null and !&quot;&quot;.equals(TAGE_TYPE)" >
+        #{TAGE_TYPE},
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        #{DESCRIPTION},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateDGTL_XML_MSG_TAGS" >
+    update DGTL_XML_MSG_TAGS
+    <set >
+      <if test="DGTL_MSG_DEF_ID != null" >
+        <choose >
+          <when test="DGTL_MSG_DEF_ID == emptyBigDecimalValue" >
+            DGTL_MSG_DEF_ID = NULL ,
+          </when>
+          <otherwise >
+            DGTL_MSG_DEF_ID = #{DGTL_MSG_DEF_ID},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="PARENT_TAG_NAME != null" >
+        <choose >
+          <when test="PARENT_TAG_NAME.equals(&quot;&quot;)" >
+            PARENT_TAG_NAME = NULL ,
+          </when>
+          <otherwise >
+            PARENT_TAG_NAME = #{PARENT_TAG_NAME},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="COMPLEX_TYPE != null" >
+        <choose >
+          <when test="COMPLEX_TYPE.equals(&quot;&quot;)" >
+            COMPLEX_TYPE = NULL ,
+          </when>
+          <otherwise >
+            COMPLEX_TYPE = #{COMPLEX_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="TAG_NAME != null" >
+        <choose >
+          <when test="TAG_NAME.equals(&quot;&quot;)" >
+            TAG_NAME = NULL ,
+          </when>
+          <otherwise >
+            TAG_NAME = #{TAG_NAME},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="TAGE_TYPE != null" >
+        <choose >
+          <when test="TAGE_TYPE.equals(&quot;&quot;)" >
+            TAGE_TYPE = NULL ,
+          </when>
+          <otherwise >
+            TAGE_TYPE = #{TAGE_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DESCRIPTION != null" >
+        <choose >
+          <when test="DESCRIPTION.equals(&quot;&quot;)" >
+            DESCRIPTION = NULL ,
+          </when>
+          <otherwise >
+            DESCRIPTION = #{DESCRIPTION},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where DGTL_XML_MSG_TAGS_ID = #{DGTL_XML_MSG_TAGS_ID}
+  </sql>
+  <update id="updateDGTL_XML_MSG_TAGS" parameterType="com.path.dbmaps.vo.DGTL_XML_MSG_TAGSVO" >
+    <include refid="sql_updateDGTL_XML_MSG_TAGS" />
+  </update>
+</mapper>

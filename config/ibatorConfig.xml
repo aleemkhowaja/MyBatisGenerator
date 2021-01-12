@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC  "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "mybatis-generator-config_1_0.dtd" 
+  >
+ 
+<generatorConfiguration>
+<properties url="./config/generatorConfig.properties" />
+ 
+  <context id="miscellaneousTests_NoClient" targetRuntime="MyBatis3">
+
+   <commentGenerator>
+ 	 <property name="suppressDate" value="true" />
+  	 <property name="suppressAllComments" value="false"/>
+   </commentGenerator> 
+
+   <jdbcConnection  driverClass="${driverClass}" 
+     	connectionURL="${connectionUrl}"
+        userId="${dbUserName}"   
+        password="${dbPassword}">
+   </jdbcConnection> 
+    
+   <javaTypeResolver >
+      <property  name="forceBigDecimals" value="true" />
+    </javaTypeResolver>
+    
+    
+    
+    <javaModelGenerator targetPackage="${packageVO}" targetProject="./generated">
+      <property name="enableSubPackages" value="false" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    
+    <sqlMapGenerator targetPackage="${packageDAO}" targetProject="./generated">
+      <property name="enableSubPackages" value="false" />
+    </sqlMapGenerator>
+  
+      <table schema="${dbSchemaName}" tableName="${tableName}" domainObjectName="${tableName}VO"  
+       enableSelectByPrimaryKey="true"
+       enableSelectByExample="false"
+       enableInsert="true" 
+       enableCountByExample="false"
+       enableUpdateByExample="false"
+       enableUpdateByPrimaryKey="true"
+       enableDeleteByExample="false" 
+       modelType="${classType}"
+       >
+      <property name="useActualColumnNames" value="true"/>
+      <!-- ignoreQualifiersAtRuntime property used not to generate the Schema in Table Name -->
+      <property name="ignoreQualifiersAtRuntime" value="true"/> 
+      <generatedKey column="${sequenceId}" sqlStatement="SELECT &lt;choose&gt;&lt;when test=&quot;isSybase == 1&quot;&gt;ISNULL(MAX(${sequenceId}),0)+1&lt;/when&gt;&lt;otherwise&gt;NVL(MAX(${sequenceId}),0)+1&lt;/otherwise&gt;&lt;/choose&gt; FROM ${tableName}" identity="false" />
+      
+     </table>
+   
+   </context>
+  </generatorConfiguration>

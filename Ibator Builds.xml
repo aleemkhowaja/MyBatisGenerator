@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="IbatorTableGenerator" basedir="." name="Ibator Generator">
+
+	<property name="ibatorDir" value="." />
+    <property name="generatedSrcDir" value="${ibatorDir}/generated" />
+	<property name="configSrcDir" value="${ibatorDir}/config" />
+
+	 
+     <target name="IbatorTableGenerator" description="Generate the files">
+     	<delete>
+			<fileset dir="${generatedSrcDir}">
+			    <include name="**/*.*"/>
+			</fileset>
+		</delete>
+
+       <taskdef name="ibator"
+                classname="org.mybatis.generator.ant.GeneratorAntTask"
+                classpath="${configSrcDir}/mybatis-generator-core-1.3.1-path-updated.jar;${configSrcDir}/jconn3.jar;${configSrcDir}/ojdbc7.jar;${configSrcDir}/sqljdbc41.jar" />
+        	 
+       <ibator overwrite="true" configfile="${configSrcDir}/ibatorConfig.xml" verbose="true" >
+         <propertyset>
+           <propertyref name="generatedSrcDir"/>
+         </propertyset>
+       </ibator>
+     </target>
+
+ 	<target name="myBatisGenerator_jar">
+ 	 <echo message="Creating mybatis-generator-core-1.3.1-path-updated.jar"></echo>
+ 			<jar destfile="${basedir}/config/mybatis-generator-core-1.3.1-path-updated.jar"
+ 		 basedir="${basedir}/build/classes" 
+ 				  includes="**/**" >
+ 		
+ 		</jar>
+ 		 </target> 
+</project>
+
+
